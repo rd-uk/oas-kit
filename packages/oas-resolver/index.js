@@ -377,7 +377,7 @@ function findExternalRefs(options) {
                                         if (options.verbose>1) console.warn('Avoiding circular reference');
                                     }
                                     else {
-                                        refs[ref].resolvedAt = ptr;
+                                        refs[ref].resolvedAt = refs[refs[ref].data.$ref] ? refs[refs[ref].data.$ref].resolvedAt : ptr;
                                         if (options.verbose>1) console.warn('Creating initial clone of data at', ptr);
                                     }
                                     let cdata = clone(data);
@@ -496,4 +496,3 @@ module.exports = {
     optionalResolve: optionalResolve,
     resolve: resolve
 };
-
